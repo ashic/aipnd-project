@@ -5,7 +5,7 @@ __pycache__/
 
 flowers/
 /model
-
+checkpoints/
 # C extensions
 *.so
 
