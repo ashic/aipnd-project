@@ -80,13 +80,14 @@ def test(model, device, test_loader):
     logging.info(f'Accuracy on test set: {100 * test_correct / test_total}%')
 
 
-def save(model, path, mapping):
+def save(model, arch, path, mapping):
     model.to ('cpu') 
 
     payload = {
+            'arch': arch,
             'classifier': model.classifier,
             'state': model.state_dict(),
-            'mapping': mapping
+            'mapping': mapping,
     }        
 
     torch.save (payload, path)
@@ -177,7 +178,7 @@ def main(args):
 
     test(model, device, test_loader)
 
-    save(model, os.path.join(args.save_dir, "model"), class_to_idx)
+    save(model, args.arch, os.path.join(args.save_dir, "model"), class_to_idx)
 
 
 if __name__ == "__main__":
